@@ -80,9 +80,23 @@ impl Request {
 
         let (first_line, vec_headers) = Self::split_request(text);
 
-        if first_line.len() != 3 {
-            return Response::bad_request();
-        }
+        // if first_line.len() == 3 {
+        //     HttpMethod::validate(&first_line[0]).unwrap();
+        //
+        //     let route = match Route::validate(&first_line[1]) {
+        //         Ok(route) => route ,
+        //         Err(response) => return  response ,
+        //     };
+        //
+        //     RequestHeaders::validate(vec_headers).unwrap();
+        //
+        //     let response = Response::send(route);
+        //     return response
+        // }
+        // // TODO restructure this if clause to != instead of ==
+        // Response::default()
+
+        if first_line.len() != 3 { return Response::bad_request() }
 
         HttpMethod::validate(&first_line[0]).unwrap();
 
@@ -94,6 +108,7 @@ impl Request {
         RequestHeaders::validate(vec_headers).unwrap();
 
         let response = Response::send(route);
+        println!("{:#?}", response);
         response
     }
 
