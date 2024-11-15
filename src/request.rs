@@ -71,7 +71,7 @@ impl Request {
     /// ```
     /// This vector is then sent to the [RequestHeaders::validate] function
     /// witch validates the headers and stores them with the corresponded values
-    /// inside the request.method HashMap and returns the [Request] struct.
+    /// inside the request method HashMap and returns the [Request] struct.
     /// # NOTES
     /// When the request is parsed to a String, it ends with \r\n\r\n. Therefore,
     /// when storing the values inside their correspondent vector, we have to check
@@ -80,23 +80,7 @@ impl Request {
 
         let (first_line, vec_headers) = Self::split_request(text);
 
-        // if first_line.len() == 3 {
-        //     HttpMethod::validate(&first_line[0]).unwrap();
-        //
-        //     let route = match Route::validate(&first_line[1]) {
-        //         Ok(route) => route ,
-        //         Err(response) => return  response ,
-        //     };
-        //
-        //     RequestHeaders::validate(vec_headers).unwrap();
-        //
-        //     let response = Response::send(route);
-        //     return response
-        // }
-        // // TODO restructure this if clause to != instead of ==
-        // Response::default()
-
-        if first_line.len() != 3 { return Response::bad_request() }
+        if first_line.len() != 3 { return Response::bad_request(); }
 
         HttpMethod::validate(&first_line[0]).unwrap();
 
@@ -128,5 +112,3 @@ impl Request {
         (first_line, vec_headers)
     }
 }
-
-// TODO -> fix validate function bug

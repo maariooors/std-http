@@ -73,7 +73,7 @@ impl Response {
     }
 
     pub fn bad_request() -> Response {
-        let body: String = fs::read_to_string("./static/bad.html".to_string()).unwrap();
+        let body: String = fs::read_to_string("./static/badRequest.html".to_string()).unwrap();
 
         let mut response: Response = Response::default();
         response.status = HttpStatusCode::BadRequest;
