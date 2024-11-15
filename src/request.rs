@@ -92,7 +92,6 @@ impl Request {
         RequestHeaders::validate(vec_headers).unwrap();
 
         let response = Response::send(route);
-        println!("{:#?}", response);
         response
     }
 
